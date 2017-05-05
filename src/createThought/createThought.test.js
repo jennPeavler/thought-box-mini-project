@@ -4,26 +4,23 @@ import { shallow, mount } from 'enzyme';
 import CreateThought from './createThought.js';
 
 describe('CreateThought', () => {
+  const shallowWrapper = shallow(<CreateThought />)
+  const wrapper = mount(<CreateThought />)
 
   it('has two input fields', () => {
-    const wrapper = shallow(<CreateThought />)
-
-    expect(wrapper.find('input').length).toBe(2)
-
+    expect(shallowWrapper.find('input').length).toBe(2)
   });
 
   it('has a default state containing a body and title both starting with empty string', () => {
-    const wrapper = mount(<CreateThought />)
     const expectedState = {
       title: '',
       body: ''
     }
 
-    expect(wrapper.state()).toEqual(expectedState)
+    expect(shallowWrapper.state()).toEqual(expectedState)
   });
 
   it('fires an onChange event on user input which should update both state & the input field when user enters title', () => {
-    const wrapper = mount(<CreateThought />)
     const input = wrapper.find('#title-input')
     const expectedState = {
       title: 'abc',
@@ -51,8 +48,6 @@ describe('CreateThought', () => {
   });
 
   it('has a submit button', () => {
-    const wrapper = shallow(<CreateThought />)
-
     expect(wrapper.find('button').length).toBe(1)
   });
 
@@ -66,6 +61,7 @@ describe('CreateThought', () => {
       body: ''
     };
     const input = wrapper.find('input').last();
+
     input.simulate('change', { target: { value: 'abc' } });
     wrapper.find('button').simulate('click');
 
@@ -73,15 +69,5 @@ describe('CreateThought', () => {
     expect(input.node.value).toEqual('')
     expect(mockedSubmit).toHaveBeenCalledTimes(1)
     expect(mockedSubmit).toHaveBeenCalledWith({title: '', body: 'abc'})
-
-
-    // What input field are we trying to target? What is the action we want to simulate?
-
-    // Find the DOM element you want to click on and click on that thing
-
-    // Expect that the value of the input node equals a string
   });
-
-
-
 });

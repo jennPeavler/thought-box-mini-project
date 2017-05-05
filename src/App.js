@@ -18,8 +18,6 @@ class App extends Component {
   }
 
   render() {
-    console.log('the state thoughts')
-    console.log(this.state.thoughts)  //returns an empty object as expected
     return (
       <div className="app">
         <div className="header">
