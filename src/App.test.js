@@ -2,7 +2,8 @@ import React from 'react';
 import { shallow, mount } from 'enzyme';
 import App from './App';
 
-it.skip('renders App with className app', () => {
+it('renders App with className app', () => {
+  const wrapper = shallow(<App />)
 });
 
 it.skip('initial state starts with an empty array', () => {
